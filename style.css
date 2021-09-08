@@ -1,0 +1,10 @@
+.heading{
+    width:100%;
+    text-align: left;
+    margin-top:0;
+    font-size: large;
+}
+canvas{
+    margin-top: 0px;
+    margin-left: 250px;
+}
