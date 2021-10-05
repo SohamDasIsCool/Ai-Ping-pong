@@ -1,10 +1,47 @@
 .heading{
     width:100%;
     text-align: left;
-    margin-top:0;
-    font-size: large;
+}
+.heading h3{
+    display: inline;
+}
+.modal-dialog{
+    width:90%;
+}
+h3{
+    margin-left: 0px;
+}
+#source{
+    background-color: #f3dede;
+    line-height: 2;
+    margin:0px;
+}
+.heading button{
+    float:right;
+    border:2px solid white;
+}
+.big_img{
+    width:100%;
+}
+#start,#status{
+    font-size: 22px;
+}
+.instruction_image{
+    display:inline-block;
+    width:45%;
 }
 canvas{
-    margin-top: 0px;
-    margin-left: 250px;
+    margin-top: 50px;
+    margin-left:200px;
+    border:snow 3px solid;
+    border-radius: 20px;
+}
+.modal-body{
+    text-align:left;
+    font-size:20px;
+}
+#src{
+    text-align:center;
+    background-color: rgb(155, 155, 241);
+    color: black;
 }

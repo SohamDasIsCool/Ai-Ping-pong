@@ -25,9 +25,15 @@ function setup(){
   var canvas =  createCanvas(700,600);
 }
 
-
+function modelLoaded(){
+  console.log("Model loaddedd");
+}
 function draw(){
-
+  video=createCapture(VIDEO);
+  video.size(700,600);
+  video.hide();
+  posenet= ml5.poseNet(video,modelLoaded);
+  posenet.on('pose',gotPoses);
  background(0); 
 
  fill("black");
@@ -131,8 +137,8 @@ if(pcscore ==4){
     fill("white");
     stroke("white");
     textSize(25)
-    text("Game Over!☹☹",width/2,height/2);
-    text("Reload The Page!",width/2,height/2+30)
+    text("Game Over!☹",width/2,height/2);
+    text("Reload The Page to start again!",width/2,height/2+30)
     noLoop();
     pcscore = 0;
 }
