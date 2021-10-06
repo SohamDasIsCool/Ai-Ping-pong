@@ -12,6 +12,8 @@ var paddle1Y;
 var  playerscore =0;
 var audio1;
 var pcscore =0;
+rightWristX=0;
+rightWristY=0;
 //ball x and y and speedx speed y and radius
 var ball = {
     x:350/2,
@@ -20,21 +22,29 @@ var ball = {
     dx:3,
     dy:3
 }
-
 function setup(){
-  var canvas =  createCanvas(700,600);
+	canvas = createCanvas(700,600);
+	video=createCapture(VIDEO);
+	video.size(620,250);
+  video.id('lol');
+	poseNet=ml5.poseNet(video,modelLoaded);
+  poseNet.on('pose',gotPoses);
 }
 
 function modelLoaded(){
   console.log("Model loaddedd");
 }
+function gotPoses(results){
+  if(results.length>0){
+		console.log(results);
+		rightWristX=results[0].pose.rightWrist.x;
+		rightWristY=results[0].pose.rightWrist.y;
+		console.log("Right Wrist X="+rightWristX+" and Right Wrist Y="+rightWristY);
+	}
+}
 function draw(){
-  video=createCapture(VIDEO);
-  video.size(700,600);
-  video.hide();
-  posenet= ml5.poseNet(video,modelLoaded);
-  posenet.on('pose',gotPoses);
- background(0); 
+
+ background(0);
 
  fill("black");
  stroke("black");
@@ -51,14 +61,15 @@ function draw(){
    fill(250,0,0);
     stroke(0,0,250);
     strokeWeight(0.5);
-   paddle1Y = mouseY; 
+   paddle1Y = rightWristY; 
    rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
    
    
     //pc computer paddle
     fill("#FFA500");
     stroke("#FFA500");
-   var paddle2y =ball.y-paddle2Height/2;  rect(paddle2Y,paddle2y,paddle2,paddle2Height,100);
+   var paddle2y =ball.y-paddle2Height/2;  
+   rect(paddle2Y,paddle2y,paddle2,paddle2Height,100);
     
     //function midline call
     midline();
@@ -71,6 +82,7 @@ function draw(){
    
    //function move call which in very important
     move();
+
 }
 
 
@@ -81,7 +93,6 @@ function reset(){
    ball.y = height/2+100;
    ball.dx=3;
    ball.dy =3;
-   
 }
 
 
@@ -111,9 +122,13 @@ function drawScore(){
 
 //very important function of this game
 function move(){
-   fill(50,350,0);
-   stroke(255,0,0);
-   strokeWeight(0.5);
+   random1=Math.random()*255;
+   random2=Math.random()*255;
+   random3=Math.random()*255;
+   avg=(random1+random2+random3)/10;
+   fill(random1,random2,random3);
+   stroke(random3,random2,random1);
+   strokeWeight(avg);
    ellipse(ball.x,ball.y,ball.r,20)
    ball.x = ball.x + ball.dx;
    ball.y = ball.y + ball.dy;
