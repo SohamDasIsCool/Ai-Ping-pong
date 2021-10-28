@@ -8,7 +8,7 @@ var paddle2Y = 685,paddle2Height = 70;
 
 var score1 = 0, score2 =0;
 var paddle1Y;
-
+var playable="false";
 var  playerscore =0;
 var audio1;
 var pcscore =0;
@@ -42,8 +42,11 @@ function gotPoses(results){
 		console.log("Right Wrist X="+rightWristX+" and Right Wrist Y="+rightWristY);
 	}
 }
+function clicked(){
+playable="true";
+}
 function draw(){
-
+  if(playable="true"){
  background(0);
 
  fill("black");
@@ -53,7 +56,7 @@ function draw(){
  fill("black");
  stroke("black");
  rect(0,0,20,700);
- 
+
    //funtion paddleInCanvas call 
    paddleInCanvas();
  
@@ -82,6 +85,7 @@ function draw(){
    
    //function move call which in very important
     move();
+ }
 
 }
 
@@ -125,7 +129,7 @@ function move(){
    random1=Math.random()*255;
    random2=Math.random()*255;
    random3=Math.random()*255;
-   avg=(random1+random2+random3)/10;
+   avg=(random1+random2+random3)/30;
    fill(random1,random2,random3);
    stroke(random3,random2,random1);
    strokeWeight(avg);
