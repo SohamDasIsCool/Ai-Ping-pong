@@ -10,7 +10,8 @@ var score1 = 0, score2 =0;
 var paddle1Y;
 var playable="false";
 var  playerscore =0;
-var audio1;
+audio1="";
+audio2="";
 var pcscore =0;
 rightWristX=0;
 rightWristY=0;
@@ -23,6 +24,8 @@ var ball = {
     dy:3
 }
 function setup(){
+  audio1=loadSound("missed.wav");
+  audio2=loadSound("._ball_touch_paddle.wav")
 	canvas = createCanvas(700,600);
 	video=createCapture(VIDEO);
 	video.size(620,250);
@@ -137,13 +140,16 @@ function move(){
    ball.x = ball.x + ball.dx;
    ball.y = ball.y + ball.dy;
    if(ball.x+ball.r>width-ball.r/2){
-       ball.dx=-ball.dx-0.5;       
+       ball.dx=-ball.dx-0.5;    
+audio2.play();
    }
   if (ball.x-2.5*ball.r/2< 0){
+    audio2.play();
   if (ball.y >= paddle1Y&& ball.y <= paddle1Y + paddle1Height) {
     ball.dx = -ball.dx+0.5; 
   }
   else{
+    audio1.play();
     pcscore++;
     reset();
     navigator.vibrate(100);
